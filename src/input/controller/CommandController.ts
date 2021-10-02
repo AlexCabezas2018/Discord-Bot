@@ -7,6 +7,8 @@ import {PrintableResponse} from "../response/PrintableResponse";
 export class CommandController implements Controller {
     private COMMANDS = [new PingCommand()]; // TODO find better way
 
+    private static instance: CommandController;
+
     action(input: CommandInputContext): Response {
         try {
             const command = this.COMMANDS.find(command => command.handle(input.commandName));
@@ -17,5 +19,12 @@ export class CommandController implements Controller {
         } catch (error: any) {
             return new PrintableResponse(`Error while executing command! ${error}`);
         }
+    }
+
+    static getInstance() {
+        if(!this.instance) {
+            this.instance = new CommandController();
+        }
+        return this.instance;
     }
 }

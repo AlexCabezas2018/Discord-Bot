@@ -16,7 +16,8 @@ client.login(process.env.DISCORD_TOKEN);
 client.on('interactionCreate', (interaction: Interaction) => {
     if(interaction.isCommand()) {
         const inputContext = InputMapper.commandInputFromInteraction(interaction);
-        const response = new CommandController().action(inputContext);
-        response.run(interaction);
+        CommandController.getInstance()
+            .action(inputContext)
+            .run(interaction);
     }
 });
