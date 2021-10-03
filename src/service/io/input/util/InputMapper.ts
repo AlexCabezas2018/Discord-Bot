@@ -3,6 +3,7 @@ import {CommandInput} from "../model/CommandInput";
 
 export class InputMapper {
     static commandInputFromInteraction(interaction: CommandInteraction) : CommandInput {
-        return new CommandInput(interaction.commandName, [], new Map<string, any> ()); // TODO
+        const args = interaction.options.data.map(argument => argument.value);
+        return new CommandInput(interaction.commandName, args as string[], new Map<string, any> ());
     }
 }
