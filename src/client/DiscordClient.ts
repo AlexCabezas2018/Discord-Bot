@@ -1,4 +1,4 @@
-import {Client as ApplicationClient} from "./Client";
+import {ApplicationClient} from "./ApplicationClient";
 import {Interaction} from "discord.js";
 import {InputMapper} from "../input/util/InputMapper";
 import {CommandController} from "../input/controller/CommandController";

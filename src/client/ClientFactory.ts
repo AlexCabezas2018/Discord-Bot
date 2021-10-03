@@ -1,10 +1,10 @@
-import {Client} from "./Client";
+import {ApplicationClient} from "./ApplicationClient";
 import {DiscordClient} from "./DiscordClient";
 
 export class ClientFactory {
     private static instance: ClientFactory
 
-    getDiscordClient(): Client {
+    getDiscordClient(): ApplicationClient {
         return new DiscordClient();
     }
 
