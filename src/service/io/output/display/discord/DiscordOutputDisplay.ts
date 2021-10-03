@@ -3,10 +3,10 @@ import {OutputDisplay} from "../OutputDisplay";
 import {Output} from "../../model/Output";
 
 export abstract class DiscordOutputDisplay implements OutputDisplay {
-    protected interaction: Interaction;
+    protected _interaction: Interaction;
 
-    constructor(interaction: Interaction) {
-        this.interaction = interaction;
+    protected constructor(interaction: Interaction) {
+        this._interaction = interaction;
     }
 
     abstract display(output: Output): void;

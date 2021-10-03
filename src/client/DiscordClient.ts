@@ -29,7 +29,7 @@ export class DiscordClient implements ApplicationClient {
 
                 const inputContext = InputMapper.commandInputFromInteraction(interaction, meta);
                 CommandController.getInstance().action(inputContext)
-                    .display(new DiscordCommandOutputDisplay(interaction));
+                    .display(DiscordCommandOutputDisplay.getInstance(interaction));
             }
         });
     }
