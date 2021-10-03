@@ -1,8 +1,8 @@
 import {CommandInteraction} from "discord.js";
-import {CommandInputContext} from "../model/command/CommandInputContext";
+import {CommandInput} from "../model/input/CommandInput";
 
 export class InputMapper {
-    static commandInputFromInteraction(interaction: CommandInteraction) : CommandInputContext {
-        return new CommandInputContext(interaction.commandName, []); // TODO
+    static commandInputFromInteraction(interaction: CommandInteraction) : CommandInput {
+        return new CommandInput(interaction.commandName, []); // TODO
     }
 }

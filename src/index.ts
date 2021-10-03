@@ -1,6 +1,8 @@
-import {Interaction} from "discord.js";
-import {CommandController} from "./input/controller/CommandController";
-import {InputMapper} from "./input/util/InputMapper";
+import { Interaction } from "discord.js";
+import { CommandController } from "./input/controller/CommandController";
+import { InputMapper } from "./input/util/InputMapper";
+import { DiscordCommandResponseHandler } from "./input/response/discord/DiscordCommandResponseHandler";
+import { PrintableOutput } from "./input/model/output/PrintableOutput";
 
 require("dotenv").config();
 
@@ -14,10 +16,9 @@ client.once("ready", () => {
 client.login(process.env.DISCORD_TOKEN);
 
 client.on('interactionCreate', (interaction: Interaction) => {
-    if(interaction.isCommand()) {
+    if (interaction.isCommand()) {
         const inputContext = InputMapper.commandInputFromInteraction(interaction);
-        CommandController.getInstance()
-            .action(inputContext)
-            .run(interaction);
+        const output = CommandController.getInstance().action(inputContext);
+        DiscordCommandResponseHandler.getInstance(interaction).handle(output);
     }
 });

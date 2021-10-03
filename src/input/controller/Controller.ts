@@ -1,6 +1,6 @@
-import {InputContext} from "../model/InputContext";
-import {Response} from "../response/Response";
+import {Input} from "../model/input/Input";
+import {Output} from "../model/output/Output";
 
 export interface Controller {
-    action(input: InputContext): Response;
+    action(input: Input): Output;
 }

@@ -1,6 +1,6 @@
-import {InputContext} from "../InputContext";
+import {Input} from "./Input";
 
-export class CommandInputContext extends InputContext {
+export class CommandInput extends Input {
     private readonly _commandName: string;
     private readonly _args: string[];
 

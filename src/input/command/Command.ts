@@ -1,5 +1,5 @@
-import {CommandInputContext} from "../model/command/CommandInputContext";
-import {Response} from "../response/Response";
+import {CommandInput} from "../model/input/CommandInput";
+import {Output} from "../model/output/Output";
 
 export abstract class Command {
 
@@ -13,5 +13,5 @@ export abstract class Command {
         return this.name === name;
     }
 
-    abstract execute(input: CommandInputContext) : Response;
+    abstract execute(input: CommandInput) : Output;
 }
