@@ -3,14 +3,20 @@ import {AudibleOutputDisplay} from "../display/OutputDisplay";
 
 export class AudibleOutput extends Output {
     private readonly _songName: string;
+    private readonly _data: any
 
-    constructor(songName: string, meta: Map<string, any>) {
+    constructor(songName: string, data: any,  meta: Map<string, any>) {
         super(meta);
         this._songName = songName;
+        this._data = data;
     }
 
     get songName(): string {
         return this._songName;
+    }
+
+    get data(): any {
+        return this._data;
     }
 
     display(display: AudibleOutputDisplay): void {
