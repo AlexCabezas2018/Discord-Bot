@@ -1,8 +1,8 @@
 import {ApplicationClient} from "./ApplicationClient";
 import {Interaction} from "discord.js";
-import {InputMapper} from "./input/util/InputMapper";
-import {CommandController} from "./input/controller/CommandController";
-import {DiscordCommandOutputDisplay} from "./output/display/discord/DiscordCommandOutputDisplay";
+import {InputMapper} from "../service/io/input/util/InputMapper";
+import {CommandController} from "../service/io/input/controller/CommandController";
+import {DiscordCommandOutputDisplay} from "../service/io/output/display/discord/DiscordCommandOutputDisplay";
 const { Client, Intents } = require('discord.js');
 
 require("dotenv").config();
