@@ -3,6 +3,6 @@ import {CommandInput} from "../model/CommandInput";
 
 export class InputMapper {
     static commandInputFromInteraction(interaction: CommandInteraction) : CommandInput {
-        return new CommandInput(interaction.commandName, []); // TODO
+        return new CommandInput(interaction.commandName, [], new Map<string, any> ()); // TODO
     }
 }

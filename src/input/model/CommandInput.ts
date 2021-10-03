@@ -4,8 +4,8 @@ export class CommandInput extends Input {
     private readonly _commandName: string;
     private readonly _args: string[];
 
-    constructor(commandName: string, args: string[]) {
-        super();
+    constructor(commandName: string, args: string[], meta: Map<string, any>) {
+        super(meta);
         this._commandName = commandName;
         this._args = args;
     }
