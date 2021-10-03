@@ -1,8 +1,8 @@
 import {Command} from "./Command";
-import {CommandInput} from "../model/input/CommandInput";
+import {CommandInput} from "../model/CommandInput";
 import {CommandNames} from "./config/CommandsConfig";
-import {Output} from "../model/output/Output";
-import {PrintableOutput} from "../model/output/PrintableOutput";
+import {Output} from "../../output/model/Output";
+import {PrintableOutput} from "../../output/model/PrintableOutput";
 
 export class PingCommand extends Command {
 

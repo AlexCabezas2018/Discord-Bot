@@ -1,3 +1,5 @@
+import {OutputDisplay} from "../display/OutputDisplay";
+
 export abstract class Output {
     private readonly _meta: Map<string, any>
 
@@ -8,4 +10,6 @@ export abstract class Output {
     get meta(): Map<string, any> {
         return this._meta;
     }
+
+    abstract display(display: OutputDisplay): void;
 }

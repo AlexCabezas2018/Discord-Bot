@@ -1,5 +1,5 @@
-import {Input} from "../model/input/Input";
-import {Output} from "../model/output/Output";
+import {Input} from "../model/Input";
+import {Output} from "../../output/model/Output";
 
 export interface Controller {
     action(input: Input): Output;

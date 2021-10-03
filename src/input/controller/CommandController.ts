@@ -1,9 +1,9 @@
 import {Controller} from "./Controller";
-import {CommandInput} from "../model/input/CommandInput";
+import {CommandInput} from "../model/CommandInput";
 import {Command} from "../command/Command";
 import {commandList} from "../command/config/CommandsConfig";
-import {Output} from "../model/output/Output";
-import {PrintableOutput} from "../model/output/PrintableOutput";
+import {Output} from "../../output/model/Output";
+import {PrintableOutput} from "../../output/model/PrintableOutput";
 
 export class CommandController implements Controller {
 

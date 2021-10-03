@@ -1,4 +1,5 @@
-import { Output } from "./Output";
+import {Output} from "./Output";
+import {PrintableOutputDisplay} from "../display/OutputDisplay";
 
 export class PrintableOutput extends Output {
     private readonly _outputText: string
@@ -10,5 +11,9 @@ export class PrintableOutput extends Output {
 
     get outputText(): string {
         return this._outputText;
+    }
+
+    display(display: PrintableOutputDisplay): void {
+        display.print(this);
     }
 }

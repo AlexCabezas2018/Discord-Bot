@@ -1,5 +1,5 @@
-import {CommandInput} from "../model/input/CommandInput";
-import {Output} from "../model/output/Output";
+import {CommandInput} from "../model/CommandInput";
+import {Output} from "../../output/model/Output";
 
 export abstract class Command {
 
