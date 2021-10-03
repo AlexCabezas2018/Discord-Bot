@@ -1,11 +1,14 @@
 import {Interaction} from "discord.js";
-import {PrintableOutputDisplay} from "../OutputDisplay";
+import {OutputDisplay} from "../OutputDisplay";
+import {Output} from "../../model/Output";
 
-export abstract class DiscordOutputDisplay extends PrintableOutputDisplay {
+export abstract class DiscordOutputDisplay implements OutputDisplay {
     protected interaction: Interaction;
 
     constructor(interaction: Interaction) {
-        super();
         this.interaction = interaction;
     }
+
+    abstract display(output: Output): void;
 }
+

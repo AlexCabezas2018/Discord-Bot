@@ -1,10 +1,16 @@
 import {Output} from "../model/Output";
 import {PrintableOutput} from "../model/PrintableOutput";
+import {AudibleOutput} from "../model/AudibleOutput";
 
-export abstract class OutputDisplay {
-    abstract display(output: Output): void;
+export interface OutputDisplay {
+    display(output: Output): void;
 }
 
-export abstract class PrintableOutputDisplay extends OutputDisplay {
-    abstract print(output: PrintableOutput): void
+export interface PrintableOutputDisplay extends OutputDisplay {
+    print(output: PrintableOutput): void
 }
+
+export interface AudibleOutputDisplay extends OutputDisplay {
+    reproduce(output: AudibleOutput): void;
+}
+

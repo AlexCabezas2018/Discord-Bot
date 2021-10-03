@@ -1,11 +1,11 @@
-import {PingCommand} from "../PingCommand";
+import {PlayMusicCommand} from "../PlayMusicCommand";
 
 enum CommandNames {
-    PING_COMMAND = "ping"
+    PLAY_MUSIC_COMMAND = "play"
 }
 
 const commandList = [
-    new PingCommand()
+    new PlayMusicCommand()
 ];
 
 export { CommandNames, commandList }
