@@ -20,9 +20,10 @@ export class DiscordClient implements ApplicationClient {
 
         client.on('interactionCreate', (interaction: Interaction) => {
             if (interaction.isCommand()) {
-                const guild = client.guilds.cache.get(interaction.guildId);
-                const member = guild.members.cache.get(interaction.member?.user.id)
-                const channelId = member.voice.channel.id;
+                const channelId = client.guilds.cache
+                    .get(interaction.guildId)
+                    .members.cache
+                    .get(interaction.member?.user.id).voice.channel.id
 
                 const meta = new Map<string, any>();
                 meta.set(MetaFields.CURRENT_VOICE_CHANNEL, channelId);

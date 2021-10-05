@@ -1,5 +1,5 @@
 import {Output} from "./Output";
-import {AudibleOutputDisplay} from "../display/OutputDisplay";
+import {AudibleOutputDisplay} from "../display/OutputDisplays";
 
 export class AudibleOutput extends Output {
     private readonly _songName: string;
@@ -20,6 +20,6 @@ export class AudibleOutput extends Output {
     }
 
     display(display: AudibleOutputDisplay): void {
-        display.reproduce(this);
+        display.play(this);
     }
 }

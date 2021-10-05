@@ -1,7 +1,7 @@
 import {DiscordOutputDisplay} from "./DiscordOutputDisplay";
 import {PrintableOutput} from "../../model/PrintableOutput";
 import {CommandInteraction, Interaction} from "discord.js";
-import {AudibleOutputDisplay, PrintableOutputDisplay} from "../OutputDisplay";
+import {AudibleOutputDisplay, PrintableOutputDisplay} from "../OutputDisplays";
 import {AudibleOutput} from "../../model/AudibleOutput";
 import {Output} from "../../model/Output";
 import {MetaFields} from "../../../input/util/MetaFields";
@@ -33,7 +33,7 @@ export class DiscordCommandOutputDisplay extends DiscordOutputDisplay implements
             .reply(output.outputText);
     }
 
-    reproduce(output: AudibleOutput): void {
+    play(output: AudibleOutput): void {
         const connection = joinVoiceChannel({
             channelId: output.meta.get(MetaFields.CURRENT_VOICE_CHANNEL),
             guildId: this._interaction.guildId,

@@ -11,7 +11,7 @@ export interface PrintableOutputDisplay extends OutputDisplay {
 }
 
 export interface AudibleOutputDisplay extends OutputDisplay {
-    reproduce(output: AudibleOutput): void;
+    play(output: AudibleOutput): void;
     pause(): void;
     resume(): void;
 }

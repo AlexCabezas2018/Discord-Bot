@@ -1,5 +1,5 @@
 import {Output} from "./Output";
-import {PrintableOutputDisplay} from "../display/OutputDisplay";
+import {PrintableOutputDisplay} from "../display/OutputDisplays";
 
 export class PrintableOutput extends Output {
     private readonly _outputText: string

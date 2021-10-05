@@ -3,7 +3,7 @@ import {CommandInput} from "../model/CommandInput";
 import {Output} from "../../output/model/Output";
 import {CommandNames} from "./config/CommandsConfig";
 import {EmptyAudibleOutput} from "../../output/model/EmptyAudibleOutput";
-import {AudibleStatus} from "../../output/model/AudibleStatus";
+import {AudioPlayerStatus} from "../../output/model/AudioPlayerStatus";
 
 export class PauseCommand extends Command {
 
@@ -12,6 +12,6 @@ export class PauseCommand extends Command {
     }
 
     execute(input: CommandInput): Output {
-        return new EmptyAudibleOutput(AudibleStatus.PAUSE, input.meta);
+        return new EmptyAudibleOutput(AudioPlayerStatus.PAUSE, input.meta);
     }
 }

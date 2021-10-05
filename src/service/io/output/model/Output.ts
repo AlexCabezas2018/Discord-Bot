@@ -1,4 +1,4 @@
-import {OutputDisplay} from "../display/OutputDisplay";
+import {OutputDisplay} from "../display/OutputDisplays";
 
 export abstract class Output {
     private readonly _meta: Map<string, any>
