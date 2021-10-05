@@ -1,7 +1,7 @@
 import {Output} from "./Output";
-import {AudibleOutputDisplay} from "../display/OutputDisplays";
+import {AudioOutputDisplay} from "../display/OutputDisplays";
 
-export class AudibleOutput extends Output {
+export class AudioOutput extends Output {
     private readonly _songName: string;
     private readonly _data: any
 
@@ -19,7 +19,7 @@ export class AudibleOutput extends Output {
         return this._data;
     }
 
-    display(display: AudibleOutputDisplay): void {
+    display(display: AudioOutputDisplay): void {
         display.play(this);
     }
 }

@@ -1,8 +1,8 @@
 import {EmptyOutput} from "./EmptyOutput";
-import {AudibleOutputDisplay} from "../display/OutputDisplays";
+import {AudioOutputDisplay} from "../display/OutputDisplays";
 import {AudioPlayerStatus} from "./AudioPlayerStatus";
 
-export class EmptyAudibleOutput extends EmptyOutput {
+export class EmptyAudioOutput extends EmptyOutput {
 
     private readonly status: AudioPlayerStatus
 
@@ -11,7 +11,7 @@ export class EmptyAudibleOutput extends EmptyOutput {
         this.status = status;
     }
 
-    display(display: AudibleOutputDisplay): void {
+    display(display: AudioOutputDisplay): void {
         if(this.status == AudioPlayerStatus.PAUSE) display.pause()
         else if(this.status == AudioPlayerStatus.RESUME) display.resume()
     }

@@ -1,7 +1,7 @@
 import {AudioProviderInput} from "../io/input/model/AudioProviderInput";
-import {AudibleOutput} from "../io/output/model/AudibleOutput";
+import {AudioOutput} from "../io/output/model/AudioOutput";
 
 export interface AudioProvider {
     acceptInput(input: AudioProviderInput): boolean
-    provide(input: AudioProviderInput): AudibleOutput;
+    provide(input: AudioProviderInput): AudioOutput;
 }

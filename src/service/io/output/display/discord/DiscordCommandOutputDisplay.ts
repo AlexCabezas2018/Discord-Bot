@@ -1,8 +1,8 @@
 import {DiscordOutputDisplay} from "./DiscordOutputDisplay";
 import {PrintableOutput} from "../../model/PrintableOutput";
 import {CommandInteraction, Interaction} from "discord.js";
-import {AudibleOutputDisplay, PrintableOutputDisplay} from "../OutputDisplays";
-import {AudibleOutput} from "../../model/AudibleOutput";
+import {AudioOutputDisplay, PrintableOutputDisplay} from "../OutputDisplays";
+import {AudioOutput} from "../../model/AudioOutput";
 import {Output} from "../../model/Output";
 import {MetaFields} from "../../../input/util/MetaFields";
 import {AudioPlayer} from "@discordjs/voice";
@@ -14,7 +14,7 @@ const {
     joinVoiceChannel,
 } = require('@discordjs/voice');
 
-export class DiscordCommandOutputDisplay extends DiscordOutputDisplay implements PrintableOutputDisplay, AudibleOutputDisplay {
+export class DiscordCommandOutputDisplay extends DiscordOutputDisplay implements PrintableOutputDisplay, AudioOutputDisplay {
 
     private readonly player: AudioPlayer;
 
@@ -33,7 +33,7 @@ export class DiscordCommandOutputDisplay extends DiscordOutputDisplay implements
             .reply(output.outputText);
     }
 
-    play(output: AudibleOutput): void {
+    play(output: AudioOutput): void {
         const connection = joinVoiceChannel({
             channelId: output.meta.get(MetaFields.CURRENT_VOICE_CHANNEL),
             guildId: this._interaction.guildId,
