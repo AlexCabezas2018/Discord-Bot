@@ -1,9 +1,9 @@
-import {Command} from "./Command";
-import {CommandInput} from "../model/CommandInput";
-import {CommandNames} from "./config/CommandsConfig";
-import {Output} from "../../output/model/Output";
-import {AudioProviderFactory} from "../../../providers/AudioProviderFactory";
-import {AudioProviderInput} from "../model/AudioProviderInput";
+import {Command} from "../Command";
+import {CommandInput} from "../../model/CommandInput";
+import {CommandNames} from "../CommandNames";
+import {Output} from "../../../output/model/Output";
+import {AudioProviderFactory} from "../../../../providers/AudioProviderFactory";
+import {AudioProviderInput} from "../../model/AudioProviderInput";
 
 export class PlayMusicCommand extends Command {
 

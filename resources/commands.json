@@ -1,0 +1,23 @@
+{
+  "commands": [
+    {
+      "name": "play",
+      "description": "Play some music, given a YOUTUBE url",
+      "options": [
+        {
+          "name": "url",
+          "description": "The url of the youtube video",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "pause",
+      "description": "Pauses the the current music"
+    },
+    {
+      "name": "resume",
+      "description": "Resumes the the current music"
+    }
+  ]
+}
