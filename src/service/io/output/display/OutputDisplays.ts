@@ -1,6 +1,7 @@
 import {Output} from "../model/Output";
 import {PrintableOutput} from "../model/PrintableOutput";
 import {AudioOutput} from "../model/AudioOutput";
+import {EmptyAudioOutput} from "../model/EmptyAudioOutput";
 
 export interface OutputDisplay {
     display(output: Output): void;
@@ -12,7 +13,7 @@ export interface PrintableOutputDisplay extends OutputDisplay {
 
 export interface AudioOutputDisplay extends OutputDisplay {
     play(output: AudioOutput): void;
-    pause(): void;
-    resume(): void;
+    pause(output: EmptyAudioOutput): void;
+    resume(output: EmptyAudioOutput): void;
 }
 

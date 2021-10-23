@@ -13,6 +13,8 @@ require("dotenv").config();
 export class DiscordClient implements ApplicationClient {
 
     start(): void {
+        global.AbortController = require("node-abort-controller").AbortController; // Music bot crash fix
+
         const client = new Client({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES]});
         client.login(process.env.DISCORD_TOKEN);
 
@@ -38,13 +40,13 @@ export class DiscordClient implements ApplicationClient {
         });
 
         client.on("guildCreate", (guild: Guild) => {
-            const commands = 
-
             guild.commands.create({
                 name: 'play', description: 'plays a song', options: [{
                     type: 3, name: "url", description: "the url of the song", required: true
                 }]
             });
+            guild.commands.create({ name: 'pause', description: 'pauses the player' });
+            guild.commands.create({ name: 'resume', description: 'resumes the music' });
         });
     }
 

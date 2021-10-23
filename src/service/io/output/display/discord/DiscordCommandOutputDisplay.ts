@@ -5,24 +5,16 @@ import {AudioOutputDisplay, PrintableOutputDisplay} from "../OutputDisplays";
 import {AudioOutput} from "../../model/AudioOutput";
 import {Output} from "../../model/Output";
 import {MetaFields} from "../../../input/util/MetaFields";
-import {AudioPlayer} from "@discordjs/voice";
-const {
-    AudioPlayerStatus,
-    StreamType,
-    createAudioPlayer,
-    createAudioResource,
-    joinVoiceChannel,
-} = require('@discordjs/voice');
+import {DiscordAudioManager} from "../../../../player/DiscordAudioManager";
+import {EmptyOutput} from "../../model/EmptyOutput";
+import {EmptyAudioOutput} from "../../model/EmptyAudioOutput";
 
 export class DiscordCommandOutputDisplay extends DiscordOutputDisplay implements PrintableOutputDisplay, AudioOutputDisplay {
-
-    private readonly player: AudioPlayer;
 
     private static instance: DiscordCommandOutputDisplay;
 
     constructor(interaction: Interaction) {
         super(interaction);
-        this.player = createAudioPlayer();
     }
 
 
@@ -34,34 +26,16 @@ export class DiscordCommandOutputDisplay extends DiscordOutputDisplay implements
     }
 
     play(output: AudioOutput): void {
-        const connection = joinVoiceChannel({
-            channelId: output.meta.get(MetaFields.CURRENT_VOICE_CHANNEL),
-            guildId: this._interaction.guildId,
-            adapterCreator: this._interaction.guild?.voiceAdapterCreator,
-        });
-
-        const resource = createAudioResource(output.data, { inputType: StreamType.Arbitrary });
-
-        this.player.play(resource);
-
-        connection.subscribe(this.player);
-
-        this.player.on(AudioPlayerStatus.Idle, () => connection.destroy());
-
-        (this._interaction as CommandInteraction)
-            .reply(`Playing song ${output.songName}`);
+        output.meta.set(MetaFields.VOICE_ADAPTER, this._interaction.guild?.voiceAdapterCreator);
+        DiscordAudioManager.getInstance().play(this._interaction.guildId, output).display(this);
     }
 
-    pause(): void {
-        this.player.pause();
-        (this._interaction as CommandInteraction)
-            .reply('Paused :)');
+    pause(output: EmptyAudioOutput): void {
+        DiscordAudioManager.getInstance().pause(this._interaction.guildId, output).display(this);
     }
 
-    resume(): void {
-        this.player.unpause();
-        (this._interaction as CommandInteraction)
-            .reply('Resumed! :)');
+    resume(output: EmptyAudioOutput): void {
+        DiscordAudioManager.getInstance().resume(this._interaction.guildId, output).display(this);
     }
 
     static getInstance(interaction: Interaction) {

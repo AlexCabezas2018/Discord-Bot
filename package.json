@@ -1,11 +1,11 @@
 {
   "name": "discord_bot",
-  "version": "1.0.0",
+  "version": "1.0.0.SNAPSHOT",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "start:prod": "ts-node ./src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +23,8 @@
     "@discordjs/voice": "^0.6.0",
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^4.4.0",
+    "node": "^14.18.1",
+    "node-abort-controller": "^3.0.1",
     "tweetnacl": "^1.0.3",
     "ytdl-core": "^4.9.1"
   }

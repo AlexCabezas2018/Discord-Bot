@@ -12,7 +12,7 @@ export class EmptyAudioOutput extends EmptyOutput {
     }
 
     display(display: AudioOutputDisplay): void {
-        if(this.status == AudioPlayerStatus.PAUSE) display.pause()
-        else if(this.status == AudioPlayerStatus.RESUME) display.resume()
+        if(this.status == AudioPlayerStatus.PAUSE) display.pause(this);
+        else if(this.status == AudioPlayerStatus.RESUME) display.resume(this);
     }
 }
