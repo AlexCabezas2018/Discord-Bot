@@ -4,6 +4,8 @@ import {PauseCommand} from "./default/PauseCommand";
 import {ResumeCommand} from "./default/ResumeCommand";
 import {PlayMusicDiscordCommand} from "./discord/PlayMusicDiscordCommand";
 import {Clients} from "../../../../client/util/Clients";
+import {PauseDiscordCommand} from "./discord/PauseDiscordCommand";
+import {ResumeDiscordCommand} from "./discord/ResumeDiscordCommand";
 
 export class CommandFactory {
 
@@ -21,8 +23,8 @@ export class CommandFactory {
 
         this.discordCommands = [
             new PlayMusicDiscordCommand(),
-            new PauseCommand(),
-            new ResumeCommand()
+            new PauseDiscordCommand(),
+            new ResumeDiscordCommand()
         ]
     }
 

@@ -32,6 +32,7 @@ export class DiscordClient implements ApplicationClient {
                 const meta = new Map<string, any>();
                 meta.set(MetaFields.CURRENT_VOICE_CHANNEL, channelId);
                 meta.set(MetaFields.CLIENT_ID, Clients.DISCORD);
+                meta.set(MetaFields.SERVER_ID, interaction.guildId);
 
                 const inputContext = InputMapper.commandInputFromInteraction(interaction, meta);
                 CommandController.getInstance().action(inputContext)

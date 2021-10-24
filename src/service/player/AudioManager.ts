@@ -10,7 +10,7 @@ export abstract class AudioManager {
         this.players = new Map<string, AudioPlayer>();
     }
 
-    getPlayer(key: string | null) : AudioPlayer | undefined {
+    getPlayer(key: string) : AudioPlayer | undefined {
         if(!key) {
             return undefined;
         }

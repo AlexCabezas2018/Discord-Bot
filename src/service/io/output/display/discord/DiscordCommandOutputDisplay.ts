@@ -6,7 +6,6 @@ import {AudioOutput} from "../../model/AudioOutput";
 import {Output} from "../../model/Output";
 import {MetaFields} from "../../../input/util/MetaFields";
 import {DiscordAudioManager} from "../../../../player/DiscordAudioManager";
-import {EmptyOutput} from "../../model/EmptyOutput";
 import {EmptyAudioOutput} from "../../model/EmptyAudioOutput";
 
 export class DiscordCommandOutputDisplay extends DiscordOutputDisplay implements PrintableOutputDisplay, AudioOutputDisplay {
@@ -17,7 +16,6 @@ export class DiscordCommandOutputDisplay extends DiscordOutputDisplay implements
         super(interaction);
     }
 
-
     display(output: Output): void { }
 
     print(output: PrintableOutput): void {
@@ -27,15 +25,21 @@ export class DiscordCommandOutputDisplay extends DiscordOutputDisplay implements
 
     play(output: AudioOutput): void {
         output.meta.set(MetaFields.VOICE_ADAPTER, this._interaction.guild?.voiceAdapterCreator);
-        DiscordAudioManager.getInstance().play(this._interaction.guildId, output).display(this);
+        DiscordAudioManager.getInstance()
+            .play(this._interaction.guildId || "", output)
+            .display(this);
     }
 
     pause(output: EmptyAudioOutput): void {
-        DiscordAudioManager.getInstance().pause(this._interaction.guildId, output).display(this);
+        DiscordAudioManager.getInstance()
+            .pause(this._interaction.guildId || "", output)
+            .display(this);
     }
 
     resume(output: EmptyAudioOutput): void {
-        DiscordAudioManager.getInstance().resume(this._interaction.guildId, output).display(this);
+        DiscordAudioManager.getInstance()
+            .resume(this._interaction.guildId || "", output)
+            .display(this);
     }
 
     static getInstance(interaction: Interaction) {

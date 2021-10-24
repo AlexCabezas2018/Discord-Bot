@@ -1,5 +1,6 @@
 export enum MetaFields {
-    CLIENT_ID = "discord",
+    CLIENT_ID = "CLIENT_ID",
     CURRENT_VOICE_CHANNEL = 'CURRENT_VOICE_CHANNEL',
     VOICE_ADAPTER = "VOICE_ADAPTER",
+    SERVER_ID = "SERVER_ID"
 }

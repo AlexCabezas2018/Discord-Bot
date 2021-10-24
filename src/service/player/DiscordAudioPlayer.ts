@@ -41,4 +41,8 @@ export class DiscordAudioPlayer extends AudioPlayer {
         this.player.pause();
     }
 
+    isInChannel(channel: string): boolean {
+        return this._channel === channel;
+    }
+
 }

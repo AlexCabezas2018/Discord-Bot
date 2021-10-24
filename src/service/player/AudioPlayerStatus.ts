@@ -1,6 +1,5 @@
 export enum AudioPlayerStatus {
-    ON_CHANNEL,
+    PLAYING,
     AVAILABLE,
     PAUSED,
-    RESUMED
 }

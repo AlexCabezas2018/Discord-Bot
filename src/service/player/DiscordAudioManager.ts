@@ -12,26 +12,27 @@ export class DiscordAudioManager extends AudioManager {
 
     private static instance: DiscordAudioManager;
 
-    play(key: string | null, output: AudioOutput): PrintableOutput {
+    play(key: string, output: AudioOutput): PrintableOutput {
         let audioPlayer = this.getPlayer(key) as DiscordAudioPlayer;
         if(!audioPlayer) {
            audioPlayer = new DiscordAudioPlayer();
         }
         const channelId = output.meta.get(MetaFields.CURRENT_VOICE_CHANNEL);
-        if(audioPlayer.status !== AudioPlayerStatus.ON_CHANNEL || audioPlayer.channel === channelId) {
+        if(audioPlayer.status !== AudioPlayerStatus.PLAYING || audioPlayer.channel === channelId) {
             const connection = joinVoiceChannel({
                 channelId: channelId,
-                guildId: key || "",
+                guildId: key,
                 adapterCreator: output.meta.get(MetaFields.VOICE_ADAPTER),
             });
             audioPlayer.play(output.data, () => {
+                connection.destroy();
                 audioPlayer.status = AudioPlayerStatus.AVAILABLE;
                 audioPlayer.channel = undefined;
             });
             connection.subscribe(audioPlayer.player);
-            audioPlayer.status = AudioPlayerStatus.ON_CHANNEL;
+            audioPlayer.status = AudioPlayerStatus.PLAYING;
             audioPlayer.channel = channelId;
-            this.players.set(key || "", audioPlayer);
+            this.players.set(key, audioPlayer);
             return new PrintableOutput(`Playing song ${output.songName}`, output.meta);
         }
         else {
@@ -39,49 +40,48 @@ export class DiscordAudioManager extends AudioManager {
         }
     }
 
-    pause(key: string | null, output: EmptyAudioOutput): PrintableOutput {
-        let audioPlayer = this.getPlayer(key) as DiscordAudioPlayer;
-        if(!audioPlayer || !audioPlayer.channel) {
-            return new PrintableOutput("No player is available to pause!");
-        }
-        if(audioPlayer.status == AudioPlayerStatus.PAUSED) {
-            return new PrintableOutput("The player is already paused!");
-        }
-        const channelId = output.meta.get(MetaFields.CURRENT_VOICE_CHANNEL);
-        if(!channelId) {
-            return new PrintableOutput("You are not in a voice channel! Please, join the voice channel to pause the music");
-        }
-        if(audioPlayer.channel === channelId) {
-            audioPlayer.pause();
-            audioPlayer.status = AudioPlayerStatus.PAUSED
-            return new PrintableOutput("Player paused!");
-        }
-        else {
-            return new PrintableOutput("You are not in the same voice channel as the bot! Please join the voice channel to pause the player!")
-        }
+    pause(key: string, output: EmptyAudioOutput): PrintableOutput {
+        return this.changePlayerStatus(
+            key,
+            AudioPlayerStatus.PAUSED,
+            output,
+            (audioPlayer: DiscordAudioPlayer) => {
+                audioPlayer.pause();
+                audioPlayer.status = AudioPlayerStatus.PAUSED
+                return new PrintableOutput("Player paused!");
+            }
+        );
     }
 
-    resume(key: string | null, output: EmptyAudioOutput): PrintableOutput {
+    resume(key: string, output: EmptyAudioOutput): PrintableOutput {
+        return this.changePlayerStatus(
+            key,
+            AudioPlayerStatus.PLAYING,
+            output,
+            (audioPlayer: DiscordAudioPlayer) => {
+                audioPlayer.resume();
+                audioPlayer.status = AudioPlayerStatus.PLAYING;
+                return new PrintableOutput("Player resumed!");
+            }
+        );
+    }
+
+    private changePlayerStatus(key: string, newStatus: AudioPlayerStatus,
+                               output: EmptyAudioOutput, inChannelCallback: Function): PrintableOutput {
+
         let audioPlayer = this.getPlayer(key) as DiscordAudioPlayer;
         if(!audioPlayer || !audioPlayer.channel) {
             return new PrintableOutput("No player is available to resume!");
         }
-
         const channelId = output.meta.get(MetaFields.CURRENT_VOICE_CHANNEL);
-        if(!channelId) {
-            return new PrintableOutput("You are not in a voice channel! Please, join the voice channel to resume the music");
-        }
-
-        if(audioPlayer.channel === channelId) {
-            if(audioPlayer.status == AudioPlayerStatus.ON_CHANNEL) {
-                return new PrintableOutput("The player is already playing music!");
+        if(audioPlayer.isInChannel(channelId)) {
+            if(audioPlayer.status == newStatus) {
+                return new PrintableOutput("The player is already in use!");
             }
-            audioPlayer.resume();
-            audioPlayer.status = AudioPlayerStatus.ON_CHANNEL;
-            return new PrintableOutput("Player resumed!");
+            return inChannelCallback(audioPlayer);
         }
         else {
-            return new PrintableOutput("You are not in the same voice channel as the bot! Please join the voice channel to resume the player!")
+            return new PrintableOutput("You are not in the same voice channel as the bot! Please join the voice channel and try again!")
         }
     }
 
